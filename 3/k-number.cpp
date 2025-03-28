@@ -30,16 +30,20 @@ using namespace std;
  * @return true если параметры корректны, false в противном случае
  * @throws Не выбрасывает исключений, но выводит сообщения об ошибках в cerr
  */
-bool validateInput(int base, int digits) {
-    if (base < 2 || base > 10) {
+bool validateInput(int base, int digits) 
+{
+    if (base < 2 || base > 10) 
+    {
         cerr << "Ошибка: основание должно быть 2-10\n";
         return false;
     }
-    if (digits <= 1 || digits >= 20) {
+    if (digits <= 1 || digits >= 20) 
+    {
         cerr << "Ошибка: количество разрядов должно быть 2-19\n";
         return false;
     }
-    if (base + digits >= 26) {
+    if (base + digits >= 26) 
+    {
         cerr << "Ошибка: K + N должно быть < 26\n";
         return false;
     }
@@ -57,7 +61,8 @@ bool validateInput(int base, int digits) {
  *       - endsWithNonZero: числа, оканчивающиеся не на 0
  *       - endsWithOneZero: числа, оканчивающиеся на один 0
  */
-double countValidNumbers(int base, int digits) {
+double countValidNumbers(int base, int digits) 
+{
     //FIXME: Нет проверки на переполнение
     constexpr int max_ll = numeric_limits<int>::max();
 
@@ -67,10 +72,12 @@ double countValidNumbers(int base, int digits) {
     int endsWithNonZero = base - 1;
     int endsWithOneZero = 1;
 
-    for (int i = 2; i <= digits; ++i) {
+    for (int i = 2; i <= digits; ++i) 
+    {
         
         if (endsWithNonZero > max_ll / (base - 1) ||
-            endsWithOneZero > max_ll / (base - 1)) {
+            endsWithOneZero > max_ll / (base - 1)) 
+        {
             throw overflow_error("Возможное переполнение при вычислениях");
         }
 
@@ -78,7 +85,8 @@ double countValidNumbers(int base, int digits) {
         int newOneZero = endsWithNonZero;
 
         
-        if (newNonZero < 0 || newOneZero < 0) {
+        if (newNonZero < 0 || newOneZero < 0) 
+        {
             throw overflow_error("Произошло переполнение");
         }
 
@@ -89,8 +97,10 @@ double countValidNumbers(int base, int digits) {
     return static_cast<double>(endsWithNonZero + endsWithOneZero);
 }
 
-int main() {
-    try {
+int main() 
+{
+    try 
+    {
         //FIXME: Неправильное именование пременных
         //int K, N;
         int base, digits;
@@ -100,7 +110,8 @@ int main() {
         cout << "Введите количество разрядов (2-19): ";
         cin >> digits;
 
-        if (!validateInput(base, digits)) {
+        if (!validateInput(base, digits)) 
+        {
             return 1;
         }
 
@@ -109,7 +120,8 @@ int main() {
         cout << "Количество подходящих чисел: " << result << "\n";
 
     }
-    catch (const exception& e) {
+    catch (const exception& e) 
+    {
         cerr << "Ошибка: " << e.what() << "\n";
         return 1;
     }
