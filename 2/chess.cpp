@@ -96,9 +96,9 @@ string ReconstructPath(vector<vector<char>>& path) {
     int n = path.size();
     // FIXME: Было: put1 как параметр. Исправлено: локальная переменная result
     std::string result;
-
-    // FIXME: Было: i и j объявлены отдельно. Исправлено: компактное объявление
-    int i = 0, j = 0;
+    
+    int i = 0;
+    int j = 0;
 
     while (i < n - 1 || j < n - 1) { 
         if (path[i][j] == 'U') {
@@ -117,7 +117,6 @@ string ReconstructPath(vector<vector<char>>& path) {
 }
 
 int main() {
-    // FIXME: Локализация не нужна для файлового ввода/вывода
     setlocale(LC_ALL, "Russian");
 
     ifstream input("a.txt");
